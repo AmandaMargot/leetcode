@@ -1,0 +1,45 @@
+class Solution {
+public:
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>> result;
+        vector<int>current_row;
+        
+        if (numRows == 0){
+            result.empty();
+            return result;
+        }
+        else if (numRows == 1){
+            current_row.push_back(1);
+            result.push_back(current_row);
+            return result;
+        }
+        else if (numRows == 2){
+            current_row.push_back(1);
+            result.push_back(current_row);
+            current_row.push_back(1);
+            result.push_back(current_row);
+            return result;
+        }
+        else{
+            current_row.push_back(1);
+            result.push_back(current_row);
+            current_row.push_back(1);
+            result.push_back(current_row);
+            current_row.clear();
+            
+            for (int i = 2; i <numRows; i++){
+                current_row.push_back(1);
+                for (int j = 1; j <i; j++){
+                    int temp = result[i-1][j-1] + result[i-1][j];
+                    current_row.push_back(temp);
+                }
+                current_row.push_back(1);
+                result.push_back(current_row);
+                current_row.clear();
+            }
+            return result;
+        }
+    }
+};
+//runtime:0 ms
+//memory:N/A
